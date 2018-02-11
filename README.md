@@ -25,8 +25,11 @@ Part 2: Writing a System Call
 Part 3: Testing it with sample code
 - The file test.c is the sample test code, it should be run with 'gcc test.c -o test'
 - The executable is run with './test 1 testfile.txt'
-- The attributes corresponding to pid==1 are printed on the console and written to the file testfile.txt which can be checked via 'cat testfile.txt'.
+- If it executed successfully, we can check the log via 'dmesg'. The attributes corresponding to pid==1 are printed on the console.
+-  Alternatively, we can check the log with 'cat testfile.txt'.
 
-
-
+Part 4: Errors Handled
+The errno 0 signals correct input, while 1 signals incorrect input.
+- 1. If the user doesn't enter a filename 
+- 2. If the user enters pid 0 or greater than 32768
         
