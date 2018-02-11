@@ -10,12 +10,12 @@ The linux 3.13.0 source code is downloaded and it's extracted.
 
 Part 2: Writing a System Call
 - In the linux-3.13.0 dir, make a new dir and add the system call files there.
-  -- Make a new file sh_task_info.c
+  - Make a new file sh_task_info.c
         - write_to_file function takes file* and char * as arguments and uses write() to write data in it.
         - In sys_sh_task_info(),a task_struct pointer task and struct file pointer file are created. For each task, it's                 
           attributes are printed on the console and simultaneously written to the file. 
-  -- A header file for it, sh_task_info.h
-  -- A Makefile for compiling the above.
+  - A header file for it, sh_task_info.h
+  - A Makefile for compiling the above.
 - This new directory has to be added to the Linux-3.13.0's Makefile by changing the line 'core -y  += kernel/ mm/ fs/ ipc/ security/ crypto/ block/' to 'core -y  += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ newdir/'.
 - The pid for the new system call has to be added,in the arch/x86/syscalls/syscall_64.tbl. We added it at 318.
 - Then, the function was included in the syscalls.h in include/ 
