@@ -1,14 +1,14 @@
 # Linux_System_call
 # Sneha Sinha - 2016098, Ritu Kumari - 2016078
 System Call for Linux written in C, compiling linux source code
-Part 1: Compiling the source code
+### Part 1: Compiling the source code
 The linux 3.13.0 source code is downloaded and it's extracted.
 - cd to that directory
 - do 'cp /boot/config-$(uname -r) .config' to copy the kernel's .config file then followed by 'make menuconfig'
 - use 'sudo make -j 4 && sudo make modules_install -j 4 && sudo make install -j 4'.The kernel and modules are compiled.
 - do 'update-initramfs -c -k 3.13.0' to update the kernel.
 
-Part 2: Writing a System Call
+### Part 2: Writing a System Call
 - In the linux-3.13.0 dir, make a new dir and add the system call files there.
   - Make a new file sh_task_info.c
         - write_to_file function takes file* and char * as arguments and uses write() to write data in it.
@@ -22,7 +22,7 @@ Part 2: Writing a System Call
 - It was recompiled again with the three parallel commands by 'sudo make -j 4 && sudo make modules_install -j 4 && sudo make install -j 4'.
 - The system is restarted.
 
-Part 3: Testing it with sample code
+### Part 3: Testing it with sample code
 - The file taskinfo.c is the sample test code, compares the process IDs by using syscall. If the input process ID and the updated pid 318 match, and there is no error in the given pid and the filename sh_task_info() is executed correctly.
 - It should be run with 'gcc taskinfo.c -o test'
 - The executable is run with './test 1 testfile.txt'
@@ -35,7 +35,9 @@ Part 3: Testing it with sample code
 
 ![](https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:35:04.png)
 
-Part 4: Errors Handled
+### Part 4: Errors Handled
 - 1. If the user doesn't enters an invalid pid such as a char or float
 - 2. If the user enters pid <=0 or greater than 32768, the function returns the errno 22 EINVAL invalid argument.
 - 3. If the sys_open() for creating a file if it doesn't exist, with write access returns an int less than 0, the function returns the errno 21 EISDIR is a directory.
+
+![](https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:53:33.png)
