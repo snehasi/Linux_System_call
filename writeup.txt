@@ -30,8 +30,7 @@ Part 3: Testing it with sample code
 -  Alternatively, we can check the log with 'cat testfile.txt'.
 
 Part 4: Errors Handled
-The errno 0 signals correct input, while 1 signals incorrect input.
 - 1. If the user doesn't enters an invalid pid such as a char or float
-- 2. If the user enters pid <=0 or greater than 32768
-- 3. If the sys_open() for creating a file, with write access returns an int less than 0
+- 2. If the user enters pid <=0 or greater than 32768, the function returns the errno 22 EINVAL invalid argument.
+- 3. If the sys_open() for creating a file if it doesn't exist, with write access returns an int less than 0, the function returns the errno 21 EISDIR is a directory.
         
