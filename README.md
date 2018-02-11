@@ -1,0 +1,39 @@
+# Linux_System_call
+# Sneha Sinha - 2016098, Ritu Kumari - 2016078
+System Call for Linux written in C, compiling linux source code
+Part 1: Compiling the source code
+The linux 3.13.0 source code is downloaded and it's extracted.
+- cd to that directory
+- do 'cp /boot/config-$(uname -r) .config' to copy the kernel's .config file then followed by 'make menuconfig'
+- use 'sudo make -j 4 && sudo make modules_install -j 4 && sudo make install -j 4'.The kernel and modules are compiled.
+- do 'update-initramfs -c -k 3.13.0' to update the kernel.
+
+Part 2: Writing a System Call
+- In the linux-3.13.0 dir, make a new dir and add the system call files there.
+  - Make a new file sh_task_info.c
+        - write_to_file function takes file* and char * as arguments and uses write() to write data in it.
+        - In sys_sh_task_info(),a task_struct pointer task and struct file pointer file are created. For each task, it's                 
+          attributes are printed on the console and simultaneously written to the file. 
+  - A header file for it, sh_task_info.h
+  - A Makefile for compiling the above.
+- This new directory has to be added to the Linux-3.13.0's Makefile by changing the line 'core -y  += kernel/ mm/ fs/ ipc/ security/ crypto/ block/' to 'core -y  += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ newdir/'.
+- The pid for the new system call has to be added,in the arch/x86/syscalls/syscall_64.tbl. We added it at 318.
+- Then, the function was included in the syscalls.h in include/ 
+- It was recompiled again with the three parallel commands by 'sudo make -j 4 && sudo make modules_install -j 4 && sudo make install -j 4'.
+- The system is restarted.
+
+Part 3: Testing it with sample code
+- The file taskinfo.c is the sample test code, compares the process IDs by using syscall. If the input process ID and the updated pid 318 match, and there is no error in the given pid and the filename sh_task_info() is executed correctly.
+- It should be run with 'gcc taskinfo.c -o test'
+- The executable is run with './test 1 testfile.txt'
+![] (https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:34:19.png)
+- If it executed successfully, we can check the log via 'dmesg'. The attributes corresponding to pid==1 are printed on the console.
+![] (https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:34:48.png)
+- The process, it's process ID, process state, RT_priority, static priority and normal priority are printed.
+-  Alternatively, we can check the log with 'cat testfile.txt'.
+![] (https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:35:04.png)
+
+Part 4: Errors Handled
+- 1. If the user doesn't enters an invalid pid such as a char or float
+- 2. If the user enters pid <=0 or greater than 32768, the function returns the errno 22 EINVAL invalid argument.
+- 3. If the sys_open() for creating a file if it doesn't exist, with write access returns an int less than 0, the function returns the errno 21 EISDIR is a directory.
