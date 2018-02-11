@@ -28,9 +28,11 @@ Part 3: Testing it with sample code
 - The executable is run with './test 1 testfile.txt'
 ![](https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:34:19.png)
 - If it executed successfully, we can check the log via 'dmesg'. The attributes corresponding to pid==1 are printed on the console.
+
 ![](https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:34:48.png)
 - The process, it's process ID, process state, RT_priority, static priority and normal priority are printed.
 -  Alternatively, we can check the log with 'cat testfile.txt'.
+
 ![](https://github.com/snehasi/Linux_System_call/blob/master/Screenshot%20from%202018-02-11%2022:35:04.png)
 
 Part 4: Errors Handled
