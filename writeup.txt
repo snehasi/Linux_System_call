@@ -4,9 +4,9 @@ System Call for Linux written in C, compiling linux source code
 Part 1: Compiling the source code
 The linux 3.13.0 source code is downloaded and it's extracted.
 - cd to that directory
-- do 'make menuconfig'
+- do 'cp /boot/config-$(uname -r) .config' to copy the kernel's .config file then followed by 'make menuconfig'
 - use 'sudo make -j 4 && sudo make modules_install -j 4 && sudo make install -j 4'.The kernel and modules are compiled.
-- do 'update-initramfs -c -k 4.7.1' to update the kernel.
+- do 'update-initramfs -c -k 3.13.0' to update the kernel.
 
 Part 2: Writing a System Call
 - In the linux-3.13.0 dir, make a new dir and add the system call files there.
