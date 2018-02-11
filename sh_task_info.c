@@ -68,7 +68,7 @@ asmlinkage long sys_sh_task_info(int pid, char* filename)
 		}
 		printk("\n\n");
 	}
-	set_fs(oldfs);
+	set_fs(old_fs);
 	return 0;
 }
 
