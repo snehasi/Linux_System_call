@@ -13,7 +13,7 @@ Part 2: Writing a System Call
   -- Make a new file sh_task_info.c
         - write_to_file function takes file* and char * as arguments and uses write() to write data in it.
         - In sys_sh_task_info(),a task_struct pointer task and struct file pointer file are created. For each task, it's                 
-        attributes are printed on the console and simultaneously written to the file. 
+          attributes are printed on the console and simultaneously written to the file. 
   -- A header file for it, sh_task_info.h
   -- A Makefile for compiling the above.
 - This new directory has to be added to the Linux-3.13.0's Makefile by changing the line 'core -y  += kernel/ mm/ fs/ ipc/ security/ crypto/ block/' to 'core -y  += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ newdir/'.
