@@ -26,6 +26,7 @@ Part 3: Testing it with sample code
 - The file test.c is the sample test code, it should be run with 'gcc test.c -o test'
 - The executable is run with './test 1 testfile.txt'
 - If it executed successfully, we can check the log via 'dmesg'. The attributes corresponding to pid==1 are printed on the console.
+- The process, it's process ID, process state, RT_priority, static priority and normal priority are printed.
 -  Alternatively, we can check the log with 'cat testfile.txt'.
 
 Part 4: Errors Handled
